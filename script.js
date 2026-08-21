@@ -17,6 +17,7 @@ if (window.L) {
   L.polyline(stops.map((stop) => stop.position), {color:'#e36d45', weight:3, dashArray:'8 8'}).addTo(map);
   const pin = L.divIcon({className:'', html:'<span class="map-pin"></span>', iconSize:[18,18], iconAnchor:[9,9]});
   stops.forEach((stop) => L.marker(stop.position, {icon:pin}).addTo(map).bindPopup(`<strong>${stop.name}</strong><br><small>${stop.detail}</small>`));
+  // Attribution flag is disabled via prototype override in index.html
   if (window.photoGps && L.markerClusterGroup) {
     const photoLayer = L.markerClusterGroup({showCoverageOnHover:false, maxClusterRadius:42});
     const photoPin = L.divIcon({className:'', html:'<span class="photo-map-pin"></span>', iconSize:[10,10], iconAnchor:[5,5]});

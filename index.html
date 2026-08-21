@@ -51,6 +51,14 @@
   </main>
   <dialog id="lightbox"><button class="close" aria-label="關閉照片">×</button><img alt=""><p></p></dialog>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Ensure Leaflet's attribution control does not render the flag icon
+    try {
+      if (window.L && L.Control && L.Control.Attribution && L.Control.Attribution.prototype && L.Control.Attribution.prototype.options) {
+        L.Control.Attribution.prototype.options.flag = false;
+      }
+    } catch (e) { /* no-op */ }
+  </script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script src="photo-gps.js"></script>
   <script src="script.js"></script>
