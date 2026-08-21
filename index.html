@@ -3,64 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>新潟，途中的風景</title>
-  <meta name="description" content="一段穿過新潟與佐渡島的五日旅程。">
+  <title>新潟，五日光景</title>
+  <meta name="description" content="用 28 幅影像重走新潟與佐渡島的五日旅程。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="wordmark" href="#top">NIIGATA <span>/ 2026</span></a>
-    <nav><a href="#route">路線</a><a href="#journal">旅誌</a><a href="#about">關於</a></nav>
+    <a class="wordmark" href="#top" aria-label="回到頁首">NIIGATA <span>2026</span></a>
+    <nav aria-label="主要導覽"><a href="#route">路線</a><a href="#story">影像旅程</a><a href="#ending">尾聲</a></nav>
   </header>
-
   <main id="top">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">日本海沿岸的一頁旅記</p>
-        <h1>新潟，<br><em>途中的風景。</em></h1>
-        <p class="intro">五天的渡輪、山風、神社鐘聲、鹹鹹海風，以及目的地之間那些不經意的發現。這不是一張景點清單，而是一段從抵達、離島到返程慢慢展開的旅程。</p>
-        <a class="scroll-cue" href="#route"><span>↓</span> 查看旅程路線</a>
+    <section class="hero" aria-labelledby="hero-title">
+      <img src="IMG_8447.jpeg" alt="從彌彥山望向新潟平原與日本海">
+      <div class="hero-shade"></div>
+      <div class="hero-copy"><p>NIIGATA / SADO · 2026.06.29—07.03</p><h1 id="hero-title">五日，<br>二十八幅光景。</h1><a href="#story">開始放映 <span aria-hidden="true">↓</span></a></div>
+      <p class="hero-note">這不是景點清單。<br>是從抵達到離開，被相機留下的順序。</p>
+    </section>
+    <section class="route" id="route" aria-labelledby="route-title">
+      <div class="route-copy">
+        <p class="section-index">THE ROUTE</p><h2 id="route-title">先看見距離，<br>再走進照片。</h2>
+        <p>從新潟機場落地，往彌彥山移動，再穿過日本海抵達佐渡。五天的路線在地圖上不算長，真正留下來的是每一次轉乘、天色和停下腳步的瞬間。</p>
+        <dl><div><dt>5</dt><dd>日</dd></div><div><dt>2</dt><dd>座島</dd></div><div><dt>28</dt><dd>幅精選影像</dd></div></dl>
       </div>
-      <figure class="hero-image"><img src="IMG_8447.jpeg" alt="從山上俯瞰新潟平原與海岸"><figcaption>回望海岸 · 2026.06.30</figcaption></figure>
+      <div id="journey-map" aria-label="新潟與佐渡島的實際旅程地圖"></div>
     </section>
-
-    <section class="route section" id="route">
-      <div class="section-label"><span>01</span><span>旅程路線</span></div>
-      <div class="route-heading"><h2>一趟旅程，<br><em>五種節奏。</em></h2><p>地理標記把這趟旅程串成一個清楚的路線：從新潟車站出發，經過彌彥神社與山景，搭船前往佐渡金山，再沿著萬代島與港邊回到城市。</p></div>
-      <div id="journey-map" class="route-map" aria-label="新潟與佐渡島的實際旅程地圖"></div>
-      <p class="map-caption">橘色路線是旅程順序；地圖上的照片標記依 GPS 位置群聚，放大後可逐張查看。</p>
-      <div class="stats"><div><strong>05</strong><span>旅途中天數</span></div><div><strong>1,777</strong><span>帶有定位的照片</span></div><div><strong>02</strong><span>走過的島嶼</span></div></div>
+    <section class="story" id="story" aria-labelledby="story-title">
+      <header class="story-intro"><p class="section-index">PHOTO STORY</p><h2 id="story-title">把旅程一格一格<br>重新放回眼前。</h2><p>橫向滑動照片，或使用左右方向鍵。點擊任一影像可進入全螢幕觀看。</p></header>
+      <div id="chapters"></div>
     </section>
-
-    <section class="journal section" id="journal">
-      <div class="section-label"><span>02</span><span>旅途手記</span></div>
-      <article class="day day-arrival"><div class="day-meta"><p class="day-number">第 01 天</p><h3>落地之後</h3><p class="place">新潟市 · 06.29</p><p class="day-copy">旅程從移動開始。先在機場與轉乘之間整理好行李，再從飛機窗邊看著海岸線、河口與城市的幾何形狀慢慢靠近；抵達之前，新潟還只是一個在地圖上向北伸展的名字。下機後，電車把人從機場帶進城市，沿途的座位、月台標示與窗外風景，讓身體也逐漸切換到旅行的速度。傍晚走出車站，街道比想像中安靜，旅館成為第一個暫時的據點。放下行李後再繞一小圈，看看車站周邊亮起的招牌，最後用一杯冰啤酒把時差與疲倦一起放下。這一天沒有安排景點，卻很重要：它讓旅程不再只是抵達，而是正式開始住進新潟。</p><div class="day-route"><span>機場</span><i>→</i><span>電車</span><i>→</i><span>新潟車站</span><i>→</i><span>夜間散步</span></div></div><div class="photo-grid"><button class="photo tall"><img src="IMG_7736.jpeg" alt="從飛機上看見的海岸線"><span>從高空抵達</span></button><button class="photo"><img src="IMG_7820.jpeg" alt="新潟車站附近安靜的街道"><span>第一次散步</span></button><button class="photo"><img src="IMG_7834.jpeg" alt="旅程第一晚的啤酒"><span>安頓下來</span></button></div></article>
-      <article class="day day-shrine"><div class="day-meta"><p class="day-number">第 02 天</p><h3>一路向上</h3><p class="place">彌彥 · 06.30</p><p class="day-copy">第二天離開新潟市中心，往彌彥的方向走。城市逐漸換成低矮街屋、樹影與山腳的空氣，交通工具的聲音也被鳥聲和腳步聲取代。彌彥神社的紅色鳥居先出現在路旁，接著是穿過杉木林的參道、石階，以及需要放慢速度才能看清楚的木造細節。神社不是一個匆匆拍完照就離開的門牌，而是這一天的節奏本身：先在入口收拾心情，沿著階梯往裡走，再在主殿前停下來。離開神社後繼續往山上，視線從樹林縫隙裡逐漸打開，最後看見整片新潟平原向海延伸。高處的風把早上的潮氣吹散，也讓前一天在城市裡的陌生感變得很遠。回程時重新經過車站、街道與山腳，這趟上山便成為旅途中第一個真正與土地接觸的日子。</p><div class="day-route"><span>新潟市</span><i>→</i><span>彌彥神社</span><i>→</i><span>山上展望</span><i>→</i><span>回到市區</span></div></div><div class="photo-grid"><button class="photo"><img src="IMG_8150.jpeg" alt="彌彥神社的紅色鳥居"><span>杉木林下</span></button><button class="photo tall"><img src="IMG_8201.jpeg" alt="彌彥神社的參拜者"><span>彌彥神社</span></button><button class="photo"><img src="IMG_8447.jpeg" alt="從山上望向平原與大海"><span>值得的風景</span></button></div></article>
-      <article class="day day-sado"><div class="day-meta"><p class="day-number">第 03 天</p><h3>渡海而行</h3><p class="place">佐渡島 · 07.01</p><p class="day-copy">第三天把旅程真正帶離本州。從新潟港登上佐渡汽船，候船室裡先是行李、票券與等待，接著船身離開碼頭，城市的輪廓在身後慢慢變小。海面上的時間和陸地不同：沒有街口可以轉彎，只有海風、船的引擎聲，以及不時靠近的海鷗。抵達佐渡後，港口的尺度忽然變得開闊，旅程也從海邊轉進相川一帶的山裡。佐渡金山的歷史不是只存在於展示文字中；礦山遺跡沿著山坡展開，舊有的設施、荒草之間的結構、被綠意包住的坑道入口，都讓人想像過去的人如何在這裡工作、生活，並把島嶼的命運與金脈連在一起。走在坑道與遺跡之間，看到的是岩石、陰影與潮濕的空氣，也看到一座島如何被產業改變。離開礦山時，視線重新回到海面，才發現這一天其實一直在兩種尺度之間移動：船上的遼闊，和山裡歷史的深度。</p><div class="day-route"><span>新潟港</span><i>→</i><span>佐渡汽船</span><i>→</i><span>相川</span><i>→</i><span>佐渡金山</span></div></div><div class="photo-grid"><button class="photo wide"><img src="IMG_9452.jpeg" alt="渡輪抵達港口"><span>渡海</span></button><button class="photo"><img src="IMG_9583.jpeg" alt="飛在渡輪旁的海鷗"><span>海上的同行者</span></button><button class="photo"><img src="IMG_0145.jpeg" alt="佐渡島的歷史礦山遺跡"><span>黃金之地</span></button><button class="photo tall"><img src="IMG_0063.jpeg" alt="被綠意覆蓋的礦坑入口"><span>走進山裡</span></button></div></article>
-      <article class="day day-night"><div class="day-meta"><p class="day-number">第 04 天</p><h3>雨、霓虹、再來一次</h3><p class="place">新潟市 · 07.02</p><p class="day-copy">回到新潟後，天氣把步調放慢，也把城市的表面變得更有層次。早上從室內空間開始，在商場、店舖與一個又一個小櫃位之間走動；這些不是特別安排的景點，卻是旅行中最容易留下記憶的地方——商品包裝、扭蛋機、餐廳的點餐畫面，以及不需要翻譯也能理解的日常節奏。偶爾從窗邊或港邊看出去，雨把對岸、船隻和建築洗成一片灰藍，讓前幾天的晴朗山景暫時退到背景。到了晚上，城市換上霓虹，街口的招牌、祭典攤位、食物香氣與人聲一起把濕冷的空氣重新加熱。這一天沒有遠行，也沒有必須完成的目標；正因如此，才更像真正住進新潟，開始注意一座城市在下雨時如何生活。</p><div class="day-route"><span>室內街區</span><i>→</i><span>商場</span><i>→</i><span>港灣雨景</span><i>→</i><span>夜間祭典</span></div></div><div class="photo-grid"><button class="photo"><img src="IMG_0860.jpeg" alt="雨中的新潟港邊"><span>天氣流動著</span></button><button class="photo tall"><img src="IMG_0912.jpeg" alt="掛滿彩色招牌的夜間街道"><span>入夜之後</span></button><button class="photo"><img src="IMG_0963.jpeg" alt="熱鬧的夜市攤位"><span>地方色彩</span></button></div></article>
-      <article class="day day-departure"><div class="day-meta"><p class="day-number">第 05 天</p><h3>最後的光</h3><p class="place">新潟 · 07.03</p><p class="day-copy">最後一天從海邊開始，像是把前幾天看過的風景重新排列一次。先在城市裡走一圈，經過港灣、河口與室內展覽空間，讓視線從近距離的器物移到遠處的水面；途中買下幾樣小東西，也替這趟旅行留下可以帶走的證據。站在高處往下看時，城市縮成道路、橋樑、碼頭與屋頂，之前走過的街區終於有了完整的形狀。午后收拾行李，從市區前往機場，旅程開始進入倒數：最後的指標、最後一次確認登機資訊、最後一杯飲料，然後是跑道另一端的天空。飛機升起後，雲層下的土地逐漸淡去，海岸線重新變成一條細線。回頭看這五天，新潟最後留下的不是一個單獨的地標，而是海風、雨光、山上的視野、佐渡坑道裡的陰影，以及許多走過才知道重要的路。</p><div class="day-route"><span>港灣</span><i>→</i><span>城市散步</span><i>→</i><span>新潟機場</span><i>→</i><span>返程</span></div></div><div class="photo-grid"><button class="photo tall"><img src="IMG_1338.jpeg" alt="從高處看見的新潟港灣"><span>縮小的城市</span></button><button class="photo"><img src="IMG_1233.jpeg" alt="在海邊的旅人肖像"><span>最後一眼</span></button><button class="photo"><img src="IMG_1812.jpeg" alt="從飛機上看見的雲與大地"><span>下次再見</span></button></div></article>
-    </section>
-
-    <section class="closing section" id="about"><p class="eyebrow">留給自己的備註</p><h2>有些地方會留下來<br><em>成為一連串細小的事情。</em></h2><p>整理自 2026 年 6 月 29 日至 7 月 3 日拍攝的 1,869 張照片與 31 段影片，其中 1,777 張照片保留了 GPS 位置。</p><a class="back-top" href="#top">↑ 回到開頭</a></section>
+    <section class="ending" id="ending"><img src="IMG_1812.jpeg" alt="返程飛機窗外的雲層與大地"><div><p>07.03 · RETURN</p><h2>最後一張照片之後，<br>旅程才開始變成記憶。</h2><a href="#top">從頭再看一次 ↑</a></div></section>
   </main>
-  <dialog id="lightbox"><button class="close" aria-label="關閉照片">×</button><img alt=""><p></p></dialog>
+  <dialog id="lightbox" aria-label="照片檢視器">
+    <button class="lightbox-close" aria-label="關閉照片">×</button><button class="lightbox-nav lightbox-prev" aria-label="上一張照片">←</button>
+    <figure><img alt=""><figcaption><span></span><small></small></figcaption></figure>
+    <button class="lightbox-nav lightbox-next" aria-label="下一張照片">→</button>
+  </dialog>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    // Ensure Leaflet's attribution control does not render the flag icon
-    try {
-      if (window.L && L.Control && L.Control.Attribution && L.Control.Attribution.prototype && L.Control.Attribution.prototype.options) {
-        L.Control.Attribution.prototype.options.flag = false;
-      }
-    } catch (e) { /* no-op */ }
-  </script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="photo-gps.js"></script>
-  <script src="script.js"></script>
+  <script src="photo-gps.js"></script><script src="script.js"></script>
 </body>
 </html>
