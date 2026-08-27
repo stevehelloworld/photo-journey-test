@@ -9,9 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="heatmap.css">
 </head>
 <body>
   <header class="topbar">
@@ -31,7 +30,10 @@
         <p>從新潟機場落地，往彌彥山移動，再穿過日本海抵達佐渡。五天的路線在地圖上不算長，真正留下來的是每一次轉乘、天色和停下腳步的瞬間。</p>
         <dl><div><dt>5</dt><dd>日</dd></div><div><dt>2</dt><dd>座島</dd></div><div><dt>28</dt><dd>幅精選影像</dd></div></dl>
       </div>
-      <div id="journey-map" aria-label="新潟與佐渡島的實際旅程地圖"></div>
+      <div class="map-frame">
+        <div id="journey-map" aria-label="新潟與佐渡島的照片拍攝熱度與實際旅程地圖"></div>
+        <div class="heat-legend" aria-hidden="true"><span></span><small>照片拍攝密度</small></div>
+      </div>
     </section>
     <section class="story" id="story" aria-labelledby="story-title">
       <header class="story-intro"><p class="section-index">PHOTO STORY</p><h2 id="story-title">把旅程一格一格<br>重新放回眼前。</h2><p>橫向滑動照片，或使用左右方向鍵。點擊任一影像可進入全螢幕觀看。</p></header>
@@ -45,7 +47,7 @@
     <button class="lightbox-nav lightbox-next" aria-label="下一張照片">→</button>
   </dialog>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
   <script src="photo-gps.js"></script><script src="script.js"></script>
 </body>
 </html>

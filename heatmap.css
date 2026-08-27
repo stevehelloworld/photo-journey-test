@@ -1,0 +1,42 @@
+.map-frame {
+  position: relative;
+  min-width: 0;
+}
+
+.heat-legend {
+  position: absolute;
+  z-index: 500;
+  left: 14px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  background: rgb(237 241 239 / 92%);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgb(23 43 43 / 20%);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.heat-legend span {
+  display: block;
+  width: 62px;
+  height: 7px;
+  background: linear-gradient(90deg, #aecfca, #ffd0bd, #ef6a3a, #b72618);
+}
+
+@media (max-width: 600px) {
+  .map-frame {
+    margin-inline: -24px;
+  }
+
+  .map-frame #journey-map {
+    margin-inline: 0;
+  }
+
+  .heat-legend {
+    left: 10px;
+    bottom: 10px;
+  }
+}

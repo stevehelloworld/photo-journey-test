@@ -77,5 +77,9 @@ if(window.L){
   L.polyline(stops.map(stop=>stop.position),{color:'#ef6a3a',weight:3,dashArray:'8 8'}).addTo(map);
   const pin=L.divIcon({className:'',html:'<span class="map-pin"></span>',iconSize:[18,18],iconAnchor:[9,9]});
   stops.forEach(stop=>L.marker(stop.position,{icon:pin}).addTo(map).bindPopup(`<strong>${stop.name}</strong><br><small>${stop.detail}</small>`));
-  if(window.photoGps&&L.markerClusterGroup){const layer=L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:42});const photoPin=L.divIcon({className:'',html:'<span class="photo-map-pin"></span>',iconSize:[9,9],iconAnchor:[4,4]});window.photoGps.forEach(photo=>{if(photo.lat!==null&&photo.lon!==null)L.marker([photo.lat,photo.lon],{icon:photoPin}).bindPopup(`<strong>${photo.file}</strong>`).addTo(layer)});layer.addTo(map)}
+  if(window.photoGps&&L.heatLayer){
+    const japanPhotos=window.photoGps.filter(photo=>photo.lat>=30&&photo.lat<=46&&photo.lon>=128&&photo.lon<=146);
+    const heatPoints=japanPhotos.map(photo=>[photo.lat,photo.lon,.55]);
+    L.heatLayer(heatPoints,{radius:22,blur:19,maxZoom:13,minOpacity:.24,gradient:{.18:'#aecfca',.42:'#ffd0bd',.68:'#ef6a3a',1:'#b72618'}}).addTo(map);
+  }
 }
