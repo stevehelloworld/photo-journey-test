@@ -24,13 +24,14 @@ const allPhotos = chapters.flatMap((chapter, chapterIndex) => chapter.photos.map
 
 allPhotos.forEach((photo, index) => {
   const isOpening = photo.photoIndex === 0;
+  const webpName = photo.src.replace('.jpeg','.webp');
   const article = document.createElement('article');
   article.className = `journey-slide${index % 2 ? ' journey-slide--reverse' : ''}`;
   article.id = `moment-${index + 1}`;
   article.innerHTML = `
     <div class="journey-visual">
       <button class="journey-image" data-photo-index="${index}" aria-label="全螢幕觀看：${photo.title}">
-        <img src="${photo.src}" alt="${photo.title}：${photo.note}" loading="lazy">
+        <picture><source media="(max-width: 900px)" srcset="media/800/${webpName}"><img src="media/1600/${webpName}" alt="${photo.title}：${photo.note}" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="1200"></picture>
       </button>
     </div>
     <div class="journey-copy">
@@ -73,7 +74,7 @@ let activePhoto = 0;
 const showPhoto = (index) => {
   activePhoto = Math.max(0,Math.min(index,allPhotos.length-1));
   const photo = allPhotos[activePhoto];
-  lightboxImage.src = photo.src; lightboxImage.alt = `${photo.title}：${photo.note}`;
+  lightboxImage.src = `media/1600/${photo.src.replace('.jpeg','.webp')}`; lightboxImage.alt = `${photo.title}：${photo.note}`;
   lightboxTitle.textContent = photo.title; lightboxMeta.textContent = `${photo.day} · ${String(activePhoto+1).padStart(2,'0')} / ${allPhotos.length}`;
   prevButton.disabled = activePhoto === 0; nextButton.disabled = activePhoto === allPhotos.length-1;
 };

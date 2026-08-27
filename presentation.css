@@ -25,6 +25,8 @@ html {
   color: var(--white);
   scroll-snap-align: start;
   scroll-margin-top: 0;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100svh;
 }
 
 .journey-slide--reverse {
@@ -38,6 +40,27 @@ html {
 .journey-visual,
 .journey-image {
   min-height: 100svh;
+}
+
+.hero-picture,
+.ending > picture,
+.journey-image picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.hero-picture img,
+.ending > picture img,
+.journey-image picture img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.hero-picture {
+  animation: hero-in 1.5s var(--ease) both;
 }
 
 .journey-image {
