@@ -17,31 +17,50 @@ const chapters = [
 ];
 
 const chaptersRoot = document.querySelector('#chapters');
-const allPhotos = [];
-chapters.forEach((chapter, chapterIndex) => {
+const allPhotos = chapters.flatMap((chapter, chapterIndex) => chapter.photos.map((photo, photoIndex) => ({
+  src:photo[0], title:photo[1], note:photo[2], day:chapter.day, chapter:chapter.title,
+  chapterCopy:chapter.copy, chapterIndex, photoIndex
+})));
+
+allPhotos.forEach((photo, index) => {
+  const isOpening = photo.photoIndex === 0;
   const article = document.createElement('article');
-  article.className = 'chapter';
-  article.id = `day-${chapterIndex + 1}`;
-  const slides = chapter.photos.map((photo, photoIndex) => {
-    const globalIndex = allPhotos.push({src:photo[0], title:photo[1], note:photo[2], day:chapter.day}) - 1;
-    return `<button class="slide" data-photo-index="${globalIndex}" aria-label="放大照片：${photo[1]}"><img src="${photo[0]}" alt="${photo[1]}：${photo[2]}" loading="lazy"><span class="slide-caption"><span>${photo[1]}</span><small>${String(photoIndex + 1).padStart(2,'0')} / ${String(chapter.photos.length).padStart(2,'0')}</small></span></button>`;
-  }).join('');
-  article.innerHTML = `<header class="chapter-header"><div class="chapter-title"><strong>${chapter.day}</strong><h3>${chapter.title}</h3></div><p class="chapter-copy">${chapter.copy}</p></header><div class="rail-wrap"><div class="photo-rail" tabindex="0" aria-label="${chapter.title}照片投影片">${slides}</div></div><div class="rail-controls"><button class="rail-prev" aria-label="上一張">←</button><button class="rail-next" aria-label="下一張">→</button><span class="rail-count">01 / ${String(chapter.photos.length).padStart(2,'0')}</span></div>`;
+  article.className = `journey-slide${index % 2 ? ' journey-slide--reverse' : ''}`;
+  article.id = `moment-${index + 1}`;
+  article.innerHTML = `
+    <div class="journey-visual">
+      <button class="journey-image" data-photo-index="${index}" aria-label="全螢幕觀看：${photo.title}">
+        <img src="${photo.src}" alt="${photo.title}：${photo.note}" loading="lazy">
+      </button>
+    </div>
+    <div class="journey-copy">
+      <div>
+        <p class="journey-day">${photo.day}</p>
+        ${isOpening ? `<p class="journey-chapter">${photo.chapter}</p>` : ''}
+        <h3>${photo.title}</h3>
+        <p class="journey-note">${photo.note}</p>
+        ${isOpening ? `<p class="journey-context">${photo.chapterCopy}</p>` : ''}
+      </div>
+      <div class="journey-progress"><span>${String(index + 1).padStart(2,'0')}</span><i></i><span>${String(allPhotos.length).padStart(2,'0')}</span></div>
+      <nav class="journey-nav" aria-label="投影片導覽">
+        <button class="journey-prev" ${index === 0 ? 'disabled' : ''} aria-label="上一張投影片">↑</button>
+        <button class="journey-next" ${index === allPhotos.length - 1 ? 'disabled' : ''} aria-label="下一張投影片">↓</button>
+      </nav>
+    </div>`;
   chaptersRoot.append(article);
 });
 
-document.querySelectorAll('.chapter').forEach((chapter) => {
-  const rail = chapter.querySelector('.photo-rail');
-  const slides = [...chapter.querySelectorAll('.slide')];
-  const count = chapter.querySelector('.rail-count');
-  const go = (direction) => rail.scrollBy({left:direction * rail.clientWidth * .78,behavior:'smooth'});
-  chapter.querySelector('.rail-prev').addEventListener('click',() => go(-1));
-  chapter.querySelector('.rail-next').addEventListener('click',() => go(1));
-  rail.addEventListener('keydown',(event) => {if(event.key==='ArrowLeft'){event.preventDefault();go(-1)} if(event.key==='ArrowRight'){event.preventDefault();go(1)}});
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {if(entry.isIntersecting){const index=slides.indexOf(entry.target);count.textContent=`${String(index+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`}});
-  },{root:rail,threshold:.6});
-  slides.forEach((slide) => observer.observe(slide));
+const journeySlides = [...document.querySelectorAll('.journey-slide')];
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const moveToSlide = (index) => journeySlides[Math.max(0,Math.min(index,journeySlides.length-1))]?.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+journeySlides.forEach((slide,index) => {
+  slide.querySelector('.journey-prev').addEventListener('click',() => moveToSlide(index-1));
+  slide.querySelector('.journey-next').addEventListener('click',() => moveToSlide(index+1));
+});
+document.addEventListener('keydown',(event) => {
+  if(lightbox?.open || !['ArrowDown','ArrowUp','PageDown','PageUp'].includes(event.key)) return;
+  const current=Math.max(0,journeySlides.findIndex(slide=>{const rect=slide.getBoundingClientRect();return rect.top<=innerHeight*.45&&rect.bottom>=innerHeight*.45}));
+  event.preventDefault();moveToSlide(current+(event.key==='ArrowDown'||event.key==='PageDown'?1:-1));
 });
 
 const lightbox = document.querySelector('#lightbox');
@@ -58,7 +77,7 @@ const showPhoto = (index) => {
   lightboxTitle.textContent = photo.title; lightboxMeta.textContent = `${photo.day} · ${String(activePhoto+1).padStart(2,'0')} / ${allPhotos.length}`;
   prevButton.disabled = activePhoto === 0; nextButton.disabled = activePhoto === allPhotos.length-1;
 };
-document.addEventListener('click',(event) => {const slide=event.target.closest('.slide');if(!slide)return;showPhoto(Number(slide.dataset.photoIndex));lightbox.showModal()});
+document.addEventListener('click',(event) => {const slide=event.target.closest('.journey-image');if(!slide)return;showPhoto(Number(slide.dataset.photoIndex));lightbox.showModal()});
 prevButton.addEventListener('click',() => showPhoto(activePhoto-1)); nextButton.addEventListener('click',() => showPhoto(activePhoto+1));
 lightbox.querySelector('.lightbox-close').addEventListener('click',() => lightbox.close());
 lightbox.addEventListener('click',(event) => {if(event.target===lightbox)lightbox.close()});
