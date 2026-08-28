@@ -9,11 +9,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="heatmap.css">
   <link rel="stylesheet" href="presentation.css?v=2">
   <link rel="stylesheet" href="data-story.css">
+  <link rel="stylesheet" href="enhancements.css">
 </head>
 <body>
   <header class="topbar">
@@ -35,7 +36,8 @@
       </div>
       <div class="map-frame">
         <div id="journey-map" aria-label="新潟與佐渡島的照片拍攝熱度與實際旅程地圖"></div>
-        <div class="heat-legend" aria-hidden="true"><span></span><small>照片拍攝密度</small></div>
+        <div class="map-fallback" hidden role="status"><strong>地圖暫時無法載入</strong><span>仍可使用下方五日導覽瀏覽完整旅程。</span><button type="button">重新載入</button></div>
+        <div class="heat-legend"><span aria-hidden="true"></span><small>照片拍攝密度：淡色較少，紅色較密集</small></div>
       </div>
     </section>
     <section class="data-story" id="data-story" aria-labelledby="data-title">
@@ -58,10 +60,11 @@
       </div>
 
       <div class="data-facts" aria-label="旅程照片統計">
-        <div><strong>1,869</strong><span>次快門</span></div>
-        <div><strong>≈324</strong><span>公里被 GPS 記錄的移動</span></div>
-        <div><strong>89.5%</strong><span>照片帶有日本境內座標</span></div>
+        <a href="#day-3"><strong>1,869</strong><span>次快門，查看拍攝最多的一天</span></a>
+        <a href="#route"><strong>≈324</strong><span>公里的 GPS 軌跡估算，回到路線地圖</span></a>
+        <a href="#photo-overview"><strong>89.5%</strong><span>照片帶有日本境內座標，打開影像總覽</span></a>
       </div>
+      <p class="data-method">距離為相鄰 GPS 記錄點的路徑估算，包含交通移動；照片數與座標比例依原始相簿中繼資料統計。</p>
 
       <div class="photo-pulse">
         <div class="pulse-copy">
@@ -96,18 +99,29 @@
       </div>
     </section>
     <section class="story" id="story" aria-labelledby="story-title">
-      <header class="story-intro"><p class="section-index">PHOTO STORY</p><h2 id="story-title">二十八張照片，<br>二十八個瞬間。</h2><p>每一幕只說一件事。向下滑動或使用上下方向鍵，沿著拍攝順序走完這趟旅程。</p></header>
-      <div id="chapters"></div>
+      <header class="story-intro"><p class="section-index">PHOTO STORY</p><h2 id="story-title">二十八張照片，<br>二十八個瞬間。</h2><div><p>每一幕只說一件事。進入影像旅程後，可向下滑動或使用上下方向鍵前進。</p><button class="overview-open" type="button">查看全部照片</button></div></header>
+      <div id="chapters" tabindex="0" aria-label="影像旅程投影片；使用上下方向鍵切換"></div>
     </section>
     <section class="ending" id="ending"><picture><source media="(max-width: 900px)" srcset="media/800/IMG_1843.webp"><img src="media/1600/IMG_1843.webp" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="1200" alt="返程飛機窗外的暮色與雲層"></picture><div><p>07.03 · RETURN</p><h2>最後一張照片之後，<br>旅程才開始變成記憶。</h2><a href="#top">從頭再看一次 ↑</a></div></section>
   </main>
+  <aside class="journey-dock" aria-label="五日旅程導覽" hidden>
+    <div class="dock-status"><span id="dock-day">DAY 01</span><strong id="dock-place">落地以後</strong><small id="dock-count">01 / 28</small></div>
+    <nav id="day-navigation" aria-label="依日期跳轉"></nav>
+    <button class="dock-overview" type="button" aria-haspopup="dialog">全部照片</button>
+    <div class="dock-progress" aria-hidden="true"><i></i></div>
+  </aside>
+  <p id="journey-announcer" class="sr-only" aria-live="polite"></p>
+  <dialog id="photo-overview" class="overview-dialog" aria-labelledby="overview-title">
+    <header><div><p>五日影像索引</p><h2 id="overview-title">選一個瞬間，從那裡出發。</h2></div><button class="overview-close" type="button" aria-label="關閉照片總覽">×</button></header>
+    <div class="overview-grid" id="overview-grid"></div>
+  </dialog>
   <dialog id="lightbox" aria-label="照片檢視器">
     <button class="lightbox-close" aria-label="關閉照片">×</button><button class="lightbox-nav lightbox-prev" aria-label="上一張照片">←</button>
-    <figure><img alt=""><figcaption><span></span><small></small></figcaption></figure>
+    <figure><div class="lightbox-media"><span role="status">照片載入中…</span><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""></div><figcaption><span></span><small></small></figcaption></figure>
     <button class="lightbox-nav lightbox-next" aria-label="下一張照片">→</button>
   </dialog>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js" crossorigin=""></script>
   <script src="photo-gps.js"></script><script src="script.js"></script>
 </body>
 </html>

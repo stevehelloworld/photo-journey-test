@@ -5,7 +5,7 @@ from PIL import Image, ImageOps
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SIZES = ((800, 76), (1600, 82))
+SIZES = ((320, 72), (800, 76), (1600, 82))
 
 
 def referenced_images() -> list[str]:
@@ -31,4 +31,4 @@ for filename in referenced_images():
             resized.thumbnail((width, width * 2), Image.Resampling.LANCZOS)
             resized.save(output_path, "WEBP", quality=quality, method=6)
 
-print(f"Optimized {len(referenced_images())} referenced images at 800px and 1600px.")
+print(f"Optimized {len(referenced_images())} referenced images at {', '.join(str(width) + 'px' for width, _ in SIZES)}.")
