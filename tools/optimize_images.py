@@ -10,11 +10,14 @@ SIZES = ((800, 76), (1600, 82))
 
 def referenced_images() -> list[str]:
     source = (ROOT / "index.html").read_text() + (ROOT / "script.js").read_text()
-    return sorted(set(re.findall(r"IMG_\d+\.jpeg", source)))
+    matches = re.findall(r"IMG_\d+\.(?:jpeg|webp)", source)
+    return sorted(set(filename.replace(".webp", ".jpeg") for filename in matches))
 
 
 for filename in referenced_images():
     source_path = ROOT / filename
+    if not source_path.exists():
+        source_path = ROOT.parent / filename
     if not source_path.exists():
         continue
 

@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>新潟，五日光景</title>
   <meta name="description" content="用 28 幅影像重走新潟與佐渡島的五日旅程。">
-  <link rel="preload" as="image" href="media/800/IMG_8447.webp" type="image/webp" media="(max-width: 900px)" fetchpriority="high">
-  <link rel="preload" as="image" href="media/1600/IMG_8447.webp" type="image/webp" media="(min-width: 901px)" fetchpriority="high">
+  <link rel="preload" as="image" href="media/1600/IMG_8377.webp" imagesrcset="media/800/IMG_8377.webp 800w, media/1600/IMG_8377.webp 1600w" imagesizes="100vw" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="heatmap.css">
-  <link rel="stylesheet" href="presentation.css">
+  <link rel="stylesheet" href="presentation.css?v=2">
 </head>
 <body>
   <header class="topbar">
@@ -22,7 +21,7 @@
   </header>
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
-      <picture class="hero-picture"><source media="(max-width: 900px)" srcset="media/800/IMG_8447.webp"><img src="media/1600/IMG_8447.webp" fetchpriority="high" width="1600" height="1200" alt="從彌彥山望向新潟平原與日本海"></picture>
+      <picture class="hero-picture"><source media="(max-width: 900px)" srcset="media/800/IMG_8377.webp"><img src="media/1600/IMG_8377.webp" fetchpriority="high" width="1600" height="1200" alt="從彌彥山稜線望向日本海"></picture>
       <div class="hero-shade"></div>
       <div class="hero-copy"><p>NIIGATA / SADO · 2026.06.29—07.03</p><h1 id="hero-title">五日，<br>二十八幅光景。</h1><a href="#story">開始放映 <span aria-hidden="true">↓</span></a></div>
       <p class="hero-note">這不是景點清單。<br>是從抵達到離開，被相機留下的順序。</p>
@@ -42,7 +41,7 @@
       <header class="story-intro"><p class="section-index">PHOTO STORY</p><h2 id="story-title">二十八張照片，<br>二十八個瞬間。</h2><p>每一幕只說一件事。向下滑動或使用上下方向鍵，沿著拍攝順序走完這趟旅程。</p></header>
       <div id="chapters"></div>
     </section>
-    <section class="ending" id="ending"><picture><source media="(max-width: 900px)" srcset="media/800/IMG_1812.webp"><img src="media/1600/IMG_1812.webp" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="1200" alt="返程飛機窗外的雲層與大地"></picture><div><p>07.03 · RETURN</p><h2>最後一張照片之後，<br>旅程才開始變成記憶。</h2><a href="#top">從頭再看一次 ↑</a></div></section>
+    <section class="ending" id="ending"><picture><source media="(max-width: 900px)" srcset="media/800/IMG_1843.webp"><img src="media/1600/IMG_1843.webp" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="1200" alt="返程飛機窗外的暮色與雲層"></picture><div><p>07.03 · RETURN</p><h2>最後一張照片之後，<br>旅程才開始變成記憶。</h2><a href="#top">從頭再看一次 ↑</a></div></section>
   </main>
   <dialog id="lightbox" aria-label="照片檢視器">
     <button class="lightbox-close" aria-label="關閉照片">×</button><button class="lightbox-nav lightbox-prev" aria-label="上一張照片">←</button>
