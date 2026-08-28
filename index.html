@@ -13,11 +13,12 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="heatmap.css">
   <link rel="stylesheet" href="presentation.css?v=2">
+  <link rel="stylesheet" href="data-story.css">
 </head>
 <body>
   <header class="topbar">
     <a class="wordmark" href="#top" aria-label="回到頁首">NIIGATA <span>2026</span></a>
-    <nav aria-label="主要導覽"><a href="#route">路線</a><a href="#story">影像旅程</a><a href="#ending">尾聲</a></nav>
+    <nav aria-label="主要導覽"><a href="#route">路線</a><a href="#data-story">數據</a><a href="#story">影像旅程</a><a href="#ending">尾聲</a></nav>
   </header>
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
@@ -35,6 +36,63 @@
       <div class="map-frame">
         <div id="journey-map" aria-label="新潟與佐渡島的照片拍攝熱度與實際旅程地圖"></div>
         <div class="heat-legend" aria-hidden="true"><span></span><small>照片拍攝密度</small></div>
+      </div>
+    </section>
+    <section class="data-story" id="data-story" aria-labelledby="data-title">
+      <header class="data-heading">
+        <p>THE OTHER ROUTE</p>
+        <h2 id="data-title">照片留下的<br>另一條路線。</h2>
+        <p class="data-lead">不只記錄去了哪裡。快門的速度、畫面的顏色，以及相機抬頭或低下的方向，也保存了旅程的節奏。</p>
+      </header>
+
+      <div class="spatial-story" aria-label="旅程空間順序">
+        <div class="spatial-line" aria-hidden="true"></div>
+        <ol>
+          <li><span>01</span><strong>空中</strong><small>離開台灣</small></li>
+          <li><span>02</span><strong>山上</strong><small>彌彥山脊</small></li>
+          <li><span>03</span><strong>海上</strong><small>渡輪航跡</small></li>
+          <li><span>04</span><strong>地底</strong><small>佐渡金山</small></li>
+          <li><span>05</span><strong>雨夜</strong><small>新潟祭典</small></li>
+          <li><span>06</span><strong>空中</strong><small>返程暮色</small></li>
+        </ol>
+      </div>
+
+      <div class="data-facts" aria-label="旅程照片統計">
+        <div><strong>1,869</strong><span>次快門</span></div>
+        <div><strong>≈324</strong><span>公里被 GPS 記錄的移動</span></div>
+        <div><strong>89.5%</strong><span>照片帶有日本境內座標</span></div>
+      </div>
+
+      <div class="photo-pulse">
+        <div class="pulse-copy">
+          <p>PHOTO PULSE</p>
+          <h3>第三天，<br>相機幾乎沒有停下。</h3>
+          <p>前往佐渡的 7 月 1 日留下 661 張照片，占整趟旅程 35.4%。雨夜那天雖然照片最少，21 點的一小時卻集中拍了 47 張。</p>
+        </div>
+        <div class="pulse-chart" role="img" aria-label="五天照片數：第一天 208 張、第二天 375 張、第三天 661 張、第四天 162 張、第五天 463 張">
+          <div style="--amount:31.5%"><b>208</b><i></i><span>06.29</span></div>
+          <div style="--amount:56.7%"><b>375</b><i></i><span>06.30</span></div>
+          <div class="peak" style="--amount:100%"><b>661</b><i></i><span>07.01</span></div>
+          <div style="--amount:24.5%"><b>162</b><i></i><span>07.02</span></div>
+          <div style="--amount:70%"><b>463</b><i></i><span>07.03</span></div>
+        </div>
+      </div>
+
+      <blockquote class="shutter-moment">
+        <p>離岸的十分鐘，<br>快門按了三十五次。</p>
+        <footer>07.01 · 09:30—09:39 · 新潟港</footer>
+        <small>城市縮小、海鳥靠近，而佐渡還在海的另一端。</small>
+      </blockquote>
+
+      <div class="daily-colors">
+        <header><p>FIVE DAYS IN COLOR</p><h3>天氣改變以後，<br>照片也換了顏色。</h3></header>
+        <div class="color-days">
+          <div><span>06.29</span><i style="--c1:#343a43;--c2:#716053;--c3:#878785;--c4:#99acbb;--c5:#cbc2b3"></i><small>機場藍 · 城市灰</small></div>
+          <div><span>06.30</span><i style="--c1:#32342b;--c2:#645b4c;--c3:#8a887f;--c4:#9ab6d0;--c5:#c9cdce"></i><small>森林綠 · 天空藍</small></div>
+          <div><span>07.01</span><i style="--c1:#362e2c;--c2:#646157;--c3:#8e8c81;--c4:#b0b8ba;--c5:#d2d5d7"></i><small>海霧灰 · 礦坑褐</small></div>
+          <div><span>07.02</span><i style="--c1:#2d2927;--c2:#6b4f41;--c3:#88796b;--c4:#a1a19a;--c5:#d0c4b3"></i><small>雨夜黑 · 祭典橘</small></div>
+          <div><span>07.03</span><i style="--c1:#3a312b;--c2:#595c58;--c3:#78695c;--c4:#8d8c86;--c5:#bac1c2"></i><small>陰雲灰 · 夕陽金</small></div>
+        </div>
       </div>
     </section>
     <section class="story" id="story" aria-labelledby="story-title">
